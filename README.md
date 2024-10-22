@@ -27,16 +27,15 @@ module.exports = {
 Use `.icon-[name]`, where `[name]` is the name of an icon.
 Use [https://lucide.dev] to easily search the name of an icon.
 
-```
+```html
 <button>
     <span aria-label="Edit some" class="icon-pencil"></span>
 </button>
-
 ```
 
 Change the color and/or size:
 
-```
+```html
 <span aria-hidden class="icon-x text-red-500"></span>
 <span aria-hidden class="icon-x size-32 text-red-500"></span>
 ```

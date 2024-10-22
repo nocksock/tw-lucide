@@ -1,16 +1,14 @@
 import plugin from 'tailwindcss/plugin'
+import * as icons from 'lucide-static'
 
-const fs = require("fs")
-const path = require("path")
+const toKebap = (str) => str.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? "-" : "") + $.toLowerCase())
 
-export default plugin(({ matchComponents, theme, addUtilities, addBase, addComponents }) => {
-  const iconsDir = path.join(__dirname, '/node_modules/lucide-static/icons/')
-  const values = {}
-
-  fs.readdirSync(iconsDir).forEach(file => {
-    let name = path.basename(file, '.svg');
-    values[name] = { name, fullPath: path.join(iconsDir, file) }
-  })
+export default plugin(({ matchComponents, theme, addComponents }) => {
+  const values = Object.keys(icons).reduce((acc, name) => {
+    const kebabName = toKebap(name);
+    acc[kebabName] = { content: icons[name] }
+    return acc
+  }, {})
 
   addComponents({
     '[class*=icon-]': {
@@ -28,17 +26,12 @@ export default plugin(({ matchComponents, theme, addUtilities, addBase, addCompo
 
   matchComponents(
     {
-      icon: ({ name, fullPath }) => {
-        let content = fs
-          .readFileSync(fullPath)
-          .toString()
-          .replace(/\r?\n|\r/g, '')
+      icon: ({ content }) => {
         return {
-          [`--lucide-icon-content`]: `url('data:image/svg+xml;utf8,${content}')`,
+          '--lucide-icon-content': `url('data:image/svg+xml;utf8,${encodeURIComponent(content)}')`,
         }
       },
     },
     { values }
   )
 })
-
