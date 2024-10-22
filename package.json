@@ -1,9 +1,9 @@
 {
   "name": "tw-lucide",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple plugin for tailwind to use lucide icons",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "keywords": [],
   "author": "Nils Riedemann",
   "license": "ISC",
