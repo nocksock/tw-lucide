@@ -22,10 +22,10 @@ module.exports = {
 }
 ```
 
-## usage
+## Usage
 
 Use `.icon-[name]`, where `[name]` is the name of an icon.
-Use [https://lucide.dev] to easily search the name of an icon.
+Use https://lucide.dev to easily search the name of an icon.
 
 ```html
 <button>
@@ -39,3 +39,18 @@ Change the color and/or size:
 <span aria-hidden class="icon-x text-red-500"></span>
 <span aria-hidden class="icon-x size-32 text-red-500"></span>
 ```
+
+## How it works
+
+It creates a component-class for each icon. e.g.: `.icon-right-arrow` that
+class will set the variable `--lucide-icon-content` which contains the svg code
+for that icon. All other icon settings are applied via `[class*=icon-]`
+
+So tailwind will only keep the minimum in the CSS.
+
+## Configuration
+
+There is no configuration. 
+
+This is a simple plugin if you want a different class-name, I recommend copy 
+pasting the contents of the index.js directly into your tailwind.config.js.
